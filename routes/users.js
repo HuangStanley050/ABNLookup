@@ -16,7 +16,9 @@ router.get('/:api', function(req, res, next) {
 
   axios.get(URL)
     .then(response => {
-      console.log(response.data)
+      var test_string = response.data;
+      test_string = test_string.slice(11, 318);
+      console.log(test_string);
     })
     .catch(err => {
       console.log(err)
