@@ -5,7 +5,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    users: [],
+    entityName: "Place Holder",
     input: ""
   }
 
@@ -26,7 +26,12 @@ class App extends Component {
   }
 
   apiCall = (input) => {
-    fetch('users/' + input);
+    fetch('users/' + input)
+      .then((response) => {
+        return response.json();
+      })
+      .then(res => this.setState({ entityName: res.EntityName }));
+
   }
 
   render() {
@@ -37,12 +42,15 @@ class App extends Component {
         <form onSubmit={(event)=>this.handleSubmit(event)}>
         <input id="number"type="text" onChange={this.handleInputChange}/>
         <input type="submit"/>
+       
         </form>
+         <p>{this.state.entityName}</p>
         </div>
 
     );
   }
 }
+
 
 export default App;
 
